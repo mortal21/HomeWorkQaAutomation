@@ -45,7 +45,7 @@ public class Tests {
         Places places = new Places();
         places.setId(6);
         DbClient.insert(places);
-        Assertions.assertEquals(new DbClient().countPlaces().size(), 6);
+        Assertions.assertEquals(6, new DbClient().countPlaces().size());
     }
 
     @Test
