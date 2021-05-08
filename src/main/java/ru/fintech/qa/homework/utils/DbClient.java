@@ -1,16 +1,15 @@
 package ru.fintech.qa.homework.utils;
 
 import org.hibernate.Session;
-import ru.fintech.qa.homework.utils.models.Animal;
-import ru.fintech.qa.homework.utils.models.Places;
 import ru.fintech.qa.homework.utils.models.Zoo;
 
 import java.util.List;
 
 public class DbClient {
-    public final List<Animal> count(final String name) {
+    public static <T> List count(final T object) {
         Session session = HibernateSessionCreator.getSessionFactory().openSession();
-        List<Animal> result = session.createNativeQuery("SELECT * FROM Animal", Animal.class).list();
+        String s = "SELECT * FROM " + object;
+        List result = session.createNativeQuery(s).list();
         session.close();
         return result;
     }
@@ -30,16 +29,9 @@ public class DbClient {
         }
     }
 
-    public final List<Places> countPlaces() {
+    public static List<Zoo> getZoos() {
         Session session = HibernateSessionCreator.getSessionFactory().openSession();
-        List<Places> result = session.createNativeQuery("SELECT * FROM Places", Places.class).list();
-        session.close();
-        return result;
-    }
-
-    public final List<Zoo> getZoos() {
-        Session session = HibernateSessionCreator.getSessionFactory().openSession();
-        List<Zoo> result = session.createNativeQuery("SELECT * FROM Zoo", Zoo.class).getResultList();
+        List<Zoo> result = session.createNativeQuery("SELECT * FROM Zoo", Zoo.class).list();
         session.close();
         return result;
     }

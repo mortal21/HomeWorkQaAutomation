@@ -45,7 +45,7 @@ public class Tests {
         Places places = new Places();
         places.setId(6);
         DbClient.insert(places);
-        Assertions.assertEquals(6, new DbClient().countPlaces().size());
+        Assertions.assertEquals(6, new DbClient().count("places").size());
     }
 
     @Test
@@ -58,9 +58,9 @@ public class Tests {
             }
         };
         ArrayList<String> actualZooList = new ArrayList<>();
-        List<Zoo> zooList = new DbClient().getZoos();
+        List<Zoo> zooList = DbClient.getZoos();
         Assertions.assertEquals(3, zooList.size());
         zooList.forEach(zoo -> actualZooList.add(zoo.getName()));
-        Assertions.assertIterableEquals(expectedZooList, actualZooList);
+        Assertions.assertEquals(expectedZooList, actualZooList);
     }
 }
